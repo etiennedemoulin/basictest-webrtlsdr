@@ -1,0 +1,18 @@
+{
+  "name": "testeradio",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@jtarrio/signals": "^0.9.3",
+    "@jtarrio/webrtlsdr": "^2.0.5",
+    "isomorphic-web-audio-api": "^1.0.2",
+    "usb": "^2.16.0"
+  }
+}
