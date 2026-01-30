@@ -6,8 +6,6 @@ import { AudioPlayer } from "@jtarrio/signals/players/audioplayer.js";
 import { webusb } from "usb"; 
 import { AudioContext } from 'isomorphic-web-audio-api';
 
-globalThis.navigator.usb = webusb;
-
 let demodulator = new Demodulator({
 	modeOption: {
   /**
@@ -26,22 +24,21 @@ let demodulator = new Demodulator({
     player: new AudioPlayer({newAudioContext: () => new AudioContext()})
 });
 
-
-let rtlProvider = new RtlProvider();
+let rtlProvider = new RtlProvider(new RTL2832U_Provider({webusb: webusb}));
 
 let radio = new Radio(
     rtlProvider, 
     demodulator, 
-    { bufferPerSecond: 20 }
+    { buffersPerSecond: 20 }
 );
 
-// console.log();
-const modeParams = modeParameters(demodulator.getMode());
-
-modeParams.setStereo(true);
-console.log(modeParams.getStereo());
+let params = modeParameters(demodulator.getMode());
+params.setStereo(false);
+demodulator.setMode(params.mode);
+console.log(demodulator.getMode());
 
 radio.setFrequency(91.7e6);
+// radio.setFrequency(94.9e6);
 demodulator.setVolume(1);
 radio.start();
 

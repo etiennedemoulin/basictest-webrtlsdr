@@ -18,21 +18,23 @@ let demodulator = new Demodulator({
            */
           deemphasizerTc: 50,
           /** Number of taps for the downsampler filter. Must be an odd number. 151 by default. */
-          downsamplerTaps: 151,
+          downsamplerTaps: 41,
           /** Number of taps for the RF filter. Must be an odd number. 151 by default. */
-          rfTaps: 151,
+          rfTaps: 41,
           /** Number of taps for the audio filter. Must be an odd number. 41 by default. */
           audioTaps: 41
         }
     }
 });
 
-const modeParams = modeParameters(demodulator.getMode());
-modeParams.setStereo(true);
-console.log(modeParams.getStereo());
+let params = modeParameters(demodulator.getMode());
+params.setStereo(true);
+demodulator.setMode(params.mode);
+console.log(demodulator.getMode());
 
-let radio = new Radio(new RTL2832U_Provider(), demodulator, {buffersPerSecond:20}); // by default buffersPerSecond : 20 (histoires de latence)
+let radio = new Radio(new RTL2832U_Provider(), demodulator, {buffersPerSecond:300}); // by default buffersPerSecond : 20 (histoires de latence)
 
-radio.setFrequency(91.7e6);
+// radio.setFrequency(91.7e6);
+radio.setFrequency(94.984e6);
 demodulator.setVolume(1);
 radio.start();

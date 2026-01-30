@@ -26,7 +26,8 @@ let demodulator = new Demodulator({
 console.log(new RtlProvider())
 
 let radio = new Radio(new RtlProvider(), demodulator, { bufferPerSecond : 20 });  // by default buffersPerSecond : 20 (histoires de latence)
-radio.setFrequency(91.7e6);
+// radio.setFrequency(91.7e6);
+radio.setFrequency(94.9e6);
 demodulator.setVolume(1);
 radio.start();
 
